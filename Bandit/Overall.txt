@@ -1,0 +1,61 @@
+Commands:
+	Find -
+		-exec CMD: The file being searched which meets the above criteria and returns 0 for as its exit status for successful command execution.
+		-ok CMD : It works same as -exec except the user is prompted first.
+		-inum N : Search for files with inode number ‘N’.
+		-links N : Search for files with ‘N’ links.
+		-name demo : Search for files that are specified by ‘demo’.
+		-newer file : Search for files that were modified/created after ‘file’.
+		-executable : Search fir files that can be exucuted
+		-perm octal : Search for the file if permission is ‘octal’.
+		-print : Display the path name of the files found by using the rest of the criteria.
+		-empty : Search for empty files and directories.
+		-group : search for groupname
+		-size +N/-N : Search for files of ‘N’ blocks; ‘N’ followed by ‘c’can be used to measure size in characters; ‘+N’ means size > ‘N’ blocks and ‘-N’ means size < 'N' blocks.
+		-user name : Search for files owned by user name or ID ‘name’.
+		\(expr \) : True if ‘expr’ is true; used for grouping criteria combined with OR or AND.
+		! expr : True if ‘expr’ is false.
+		
+		Example of find command -> "find -size 1033c ! -executable" this will search for all files in your current dir that
+	
+					                                          has a size of 1033 bites and that cant be exuuted.
+
+	Grep -
+		-c : This prints only a count of the lines that match a pattern
+		-h : Display the matched lines, but do not display the filenames.
+		-i : Ignores, case for matching
+		-l : Displays list of a filenames only.
+		-n : Display the matched lines and their line numbers.
+		-v : This prints out all the lines that do not matches the pattern
+		-e exp : Specifies expression with this option. Can use multiple times.
+		-f file : Takes patterns from file, one per line.
+		-E : Treats pattern as an extended regular expression (ERE)
+		-w : Match whole word
+		-o : Print only the matched parts of a matching line,
+ 			with each such part on a separate output line.
+
+		-A n : Prints searched line and nlines after the result.
+		-B n : Prints searched line and n line before the result.
+		-C n : Prints searched line and n lines after before the result.
+
+		Example of find command -> "find . -size 33c -group bandit6 -user bandit7 | grep bandit7" this will search for all files in your current dir that
+	
+					                                          has a size of 33 bites and that is owned by group bandit6 and owned by user bandit7
+	
+	Uniq -
+		-c – -count : It tells how many times a line was repeated by displaying a number as a prefix with the line.
+		-d – -repeated : It only prints the repeated lines and not the lines which aren’t repeated.
+		-D – -all-repeated[=METHOD] : It prints all duplicate lines and METHOD can be any of the following: 
+		none : Do not delimit duplicate lines at all. This is the default.
+		prepend : Insert a blank line before each set of duplicated lines.
+		separate : Insert a blank line between each set of duplicated lines.
+		-f N – -skip-fields(N) : It allows you to skip N fields(a field is a group of characters, delimited by whitespace) of a line before determining uniqueness of a line.
+		-i – -ignore case : By default, comparisons done are case sensitive but with this option case insensitive comparisons can be made.
+		-s N – -skip-chars(N) : It doesn’t compares the first N characters of each line while determining uniqueness. This is like the -f option, but it skips individual characters rather than fields.
+		-u – -unique : It allows you to print only unique lines.
+		-z – -zero-terminated : It will make a line end with 0 byte(NULL), instead of a newline.
+		-w N – -check-chars(N) : It only compares N characters in a line.
+		– – help : It displays a help message and exit.
+		– – version : It displays version information and exit.
+		
+		Example of command -> sort data.txt | uniq -c | grep '^ *10 ' in this case uniq -c is used to count how many times a string is shown.

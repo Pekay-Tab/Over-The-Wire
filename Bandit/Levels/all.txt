@@ -1,0 +1,246 @@
+BANDIT6 - Solved 10/11/2021 -> HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+find . -size 33c -user bandit7 -group bandit6
+
+find . -size 33c -group bandit6 -user bandit7 | grep bandit7
+
+
+Either of these can be used to solve this by searching for a file with a size off 33 bytes and owned by user bandit 7 and group bandit6
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT7 - Solved 10/11/2021 -> cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+grep millionth data.txt
+
+This seraches the data.txt file for the word "millionth"
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT8 - Solved 10/11/2021 -> UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+sort data.txt | uniq -c | grep '^ *1 '
+
+"uniq -c" is used to count how many times a line is shown and "grep '^ *1 '" filters the output to the lines thats only shown once
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT9 - Solved 10/11/2021 -> truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+strings data.txt | grep =
+
+strings puts the large random files intro string them grep = sorts the file for any strings that contain the = charitar
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT10 - Solved 10/11/2021 -> IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+base64 -d data.txt
+
+simple decode of a data.txt file -d is decode option
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT11 - Solved 10/11/2021 -> 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+tr is used to translate the traditon alphabet into ROT13 changing all the leters by 13 tr 'A-Za-z' 'N-ZA-Mn-za-m' thats how you find the answer
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT12 - Solved 10/11/2021 -> 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+mkdir /tmp/pekay
+
+#this will allow us to work from our own folder and have perms.
+
+cp data.txt /tmp/pekay
+cd /tmp/pekay
+
+#this moves the data file into our deroctory and then we open it
+
+file data.txt
+
+#We see that we currently have a ASCII file but since we know we have a hexdump we need to convert the file to binary.
+
+xxd -r data.txt data2.gz
+
+#revert the hexdump 
+
+gzip -d data2.gz
+
+# decompress it
+
+mv data2 data2.bz2
+
+bzip2 -d data2.bz2
+
+mv data2 data2.gz
+
+gzip -d data2.gz
+
+tar -xvf data2
+
+file data5.bin 
+
+REPEAT until output of file is not a compressed or hexdump
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BANDIT13 - Solved 10/11/2021 -> 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+Copying the private key and then setting up a local ssh host with the key and username bandit14 you can gain accses to the server.
+
+#once on bandit 14 machine
+
+cat /etc/bandit_pass/bandit14 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT14 - Solved 10/11/2021 -> BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+telnet localhost 30000
+
+then enter the level pswd!
+
+http://img.pekay.me/phwOPP
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT15 - Solved 10/12/2021 -> cluFn7wTiGryunymYOu4RcffSxQluehd
+
+openssl s_client -connect localhost:30001
+
+http://img.pekay.me/0lGSeB
+
+ssl handshake and then u get pswd
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT16 - Solved 10/14/2021 -> xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
+
+nmap localhost -p 31000-32000
+
+#to see what ports are open
+
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+
+#now you must see what ports are using ssl
+
+									
+____________________________________Ports__________SSL__
+openssl s_client -connect localhost:31046 -quiet | NO   |
+openssl s_client -connect localhost:31518 -quiet | YES  |
+openssl s_client -connect localhost:31691 -quiet | NO   |
+openssl s_client -connect localhost:31790 -quiet | YES  |
+openssl s_client -connect localhost:31960 -quiet | NO   |
+
+#This means we want to try 31518 & 31790
+
+openssl s_client -connect localhost:31790 -quiet
+
+#31790 was the correct port. so enter current level pswd
+
+#then use the ssl private key you get to move to bandit17
+#then find pswd
+
+cat /etc/bandit_pass/bandit17
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT17 - Solved 10/14/2021 -> kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+diff passwords.old passwords.new
+
+#comapir the two files
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT18 - Solved 10/14/2021 -> IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+#u cant login with a normal ssh client u have to use the command so you dont run bashrc file
+
+ssh -t username@hostname /bin/sh
+cat readme
+#done!
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT19 - Solved 10/15/2021 -> GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+#Because the file has evlevated permisons (Symbolated by the red name) any commands you run with it run evlvated
+http://img.pekay.me/Dl8aPg
+
+./bandit20-do cat /etc/bandit_pass/bandit20 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT20 - Solved 10/16/2021 -> gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+nmap localhost
+
+#look at all the ports being used then chose a random port number as long as its not one of the in use ports.
+# i will use 2000
+# in one terminal start netcat for port 2000
+
+nc -lp 2000
+
+# in a seprate terminal run the file
+
+./suconnect 2000
+
+# now go back to netcat and enter level pswd
+ 
+http://img.pekay.me/Z6Cw6B
+http://img.pekay.me/VfwWtb
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT21 - Solved 10/16/2021 -> Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+
+
+ls /etc/cron.d/
+
+# see what cron files there are
+
++ cronjob_bandit15_root  cronjob_bandit17_root  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24  cronjob_bandit25_root
+
+# bandit 22 is the one we care abt for this level
+
+cat /etc/cron.d/cronjob_bandit22 
+
+#take a look at the script
+
++ bandit21@bandit:/etc/cron.d$ cat /etc/cron.d/cronjob_bandit22 
++ @reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
++ * * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
++ bandit21@bandit:/etc/cron.d$ 
+
+#here we ccant see it reboots as well as runs the script /usr/bin/cronjob_bandit22.sh 
+# lests look at that script
+
+cat /usr/bin/cronjob_bandit22.sh 
+
+#this shows us that is does a few difrrent things but mainly that it writes /etc/bandit_pass/bandit22 into /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BANDIT22 - Solved 10/16/2021 -> Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+
+cd /etc/cron.d/ && ls /etc/cron.d/
+
+cat cronjob_bandit23
+
+cat /usr/bin/cronjob_bandit23.sh
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
