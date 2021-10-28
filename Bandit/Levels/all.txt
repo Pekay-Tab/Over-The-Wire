@@ -386,6 +386,14 @@ sshpass -p 5b90576bedb2cc04c86a9e924ce42faf ssh bandit30@bandit.labs.overthewire
 
 mktemp -d
 
+git clone ssh://bandit30-git@localhost/home/bandit30-git/rep
+
+git show-branch --all
+
+git checkout -b origin/HEAD
+
+git checkout HEAD
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
